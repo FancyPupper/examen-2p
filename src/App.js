@@ -35,22 +35,26 @@ class App extends Component {
   }
 
   handleDelete = (id) => {
-    return fetch("https://still-garden-88285.herokuapp.com/draft_tweets", {
+
+    let headers = {};
+    headers['Content-Type'] = 'application/json';
+
+    const options = {
+      headers: headers,
       method: 'DELETE',
-      headers: {'Content-Type': 'application/json'},
-      body: id
-    })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        console.log("Deleted");
-      },
-      (error) => {
-        this.setState({
-          error: error
-        })
-      }
-    )
+    };
+
+    fetch("https://still-garden-88285.herokuapp.com/draft_tweets/" + id, options)
+      .then(
+        (result) => {
+          alert("Deleted")
+        },
+        (error) => {
+          this.setState({
+            error: error
+          });
+        }
+      )
 
   }
 

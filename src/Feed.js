@@ -11,6 +11,11 @@ function EmptyState(props) {
 }
 
 class Feed extends Component {
+  delete = (id) => {
+    //console.log("Id in feed is: " + id);
+    this.props.handleDelete(id);
+  }
+
   render() {
     return(
       <ul className="feed">
@@ -20,6 +25,7 @@ class Feed extends Component {
         {
           this.props.tweets.map((tweet) => (
             <Tweet 
+              delete={this.delete}
               key={tweet.id}
               obj={tweet}
               // user={tweet.user_name}

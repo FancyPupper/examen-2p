@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Tweet extends Component {
+
+  sendId = (event) => {
+    event.preventDefault();
+    let id = this.props.obj.id;
+    this.props.delete(id);
+    //alert('Sended ' + id);
+  }
+
   render() {
     const { user_name, avatar, description, created_at } = this.props.obj;
     
@@ -21,6 +29,7 @@ class Tweet extends Component {
           </div>
           <div className="tweet-info">{description}</div>
         </div>
+        <button onClick={this.sendId}>Delete</button>
       </li>
     )
   }

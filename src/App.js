@@ -34,6 +34,26 @@ class App extends Component {
       )
   }
 
+  handleDelete = (id) => {
+    return fetch("https://still-garden-88285.herokuapp.com/draft_tweets", {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: id
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log("Deleted");
+      },
+      (error) => {
+        this.setState({
+          error: error
+        })
+      }
+    )
+
+  }
+
   handleSubmit(newText) {
     this.setState({isLoaded: false});
 
@@ -101,6 +121,7 @@ class App extends Component {
               onSubmitNewTweet={this.handleSubmit}
             />
             <Feed 
+              handleDelete={this.handleDelete}
               tweets={tweets}
               isLoaded={isLoaded}
             />
